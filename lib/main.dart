@@ -13,7 +13,6 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
@@ -30,18 +29,18 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   var _switchChecked = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Flutter Widget"), backgroundColor: Colors.black12),
+      appBar: AppBar(
+          title: Text("Flutter Widget"), backgroundColor: Colors.black12),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-            color: _switchChecked?Colors.blueGrey: Colors.cyan,
+            color: _switchChecked ? Colors.blueGrey : Colors.cyan,
             padding: EdgeInsets.all(20),
             alignment: Alignment.center,
             child: Switch(
@@ -49,15 +48,26 @@ class _MyHomePageState extends State<MyHomePage> {
               value: _switchChecked,
               activeColor: Colors.red,
               onChanged: (value) {
-              setState(() {
-                _switchChecked = value;
-              });
-            },),
-          )
+                setState(() {
+                  _switchChecked = value;
+                });
+              },
+            ),
+          ),
+          ExpansionTile(
+            title: Text("One"),
+            subtitle: Text("This is one"),
+            trailing: Icon(Icons.arrow_downward),
+            children: [
+              Container(
+                height: 100,
+                color: Colors.cyan,
+              )
+            ],
+          ),
+
         ],
       ),
     );
   }
 }
-
-
