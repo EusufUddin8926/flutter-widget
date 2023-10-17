@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -71,8 +73,15 @@ class _MyHomePageState extends State<MyHomePage> {
               height: 100,
               color: Colors.blueGrey,
             ),
-          )
-
+          ),
+          Container(
+              clipBehavior: Clip.hardEdge,
+              decoration: const BoxDecoration(),
+              height: 100,
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+                child: Container(color: Colors.blue.withOpacity(0.3)),
+              )),
         ],
       ),
     );
