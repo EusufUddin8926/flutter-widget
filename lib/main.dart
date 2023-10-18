@@ -82,6 +82,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
                 child: Container(color: Colors.blue.withOpacity(0.3)),
               )),
+          SizedBox(height: 20),
+          Center(
+            child: Container(
+              height: 100,
+              width: 100,
+              transform: Matrix4.rotationZ(-30),
+              color: Colors.pink,
+            ),
+          )
         ],
       ),
     );
