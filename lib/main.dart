@@ -32,18 +32,28 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   var _switchChecked = false;
-  late DateTime _dateTime;
+  DateTime? _dateTime;
+  TimeOfDay? _timeOfDay;
 
-  getDate() async{
-    DateTime? date =await showDatePicker(
+  getDate() async {
+    DateTime? date = await showDatePicker(
         context: context,
-        initialDate: DateTime(DateTime.now().year),
-        firstDate: DateTime(DateTime.now().year-20),
-        lastDate: DateTime(DateTime.now().year+2));
+        initialDate: DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day),
+        firstDate: DateTime(DateTime.now().year - 20),
+        lastDate: DateTime(DateTime.now().year + 2));
 
     setState(() {
       _dateTime = date!;
       print(_dateTime);
+    });
+  }
+
+  getTime() async {
+    TimeOfDay? day =
+        await showTimePicker(context: context, initialTime: TimeOfDay.now());
+
+    setState(() {
+      _timeOfDay = day!;
     });
   }
 
@@ -114,34 +124,51 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Container(
-                  width: MediaQuery.of(context).size.width/2,
+                  width: MediaQuery.of(context).size.width / 2,
                   color: Colors.pink,
                   alignment: Alignment.center,
                   child: Column(
                     children: [
-                      ElevatedButton(onPressed: (){
-                        getDate();
-                      }, child: Text("DatePicker")),
-                      ElevatedButton(onPressed: (){}, child: Text("TimePicker")),
+                      ElevatedButton(
+                          onPressed: () {
+                            getDate();
+                          },
+                          child: Text("DatePicker")),
+                      ElevatedButton(
+                          onPressed: () {
+                            getTime();
+                          }, child: Text("TimePicker")),
                     ],
                   ),
                 ),
                 Container(
-                  width: MediaQuery.of(context).size.width/2,
+                  width: MediaQuery.of(context).size.width / 2,
                   color: Colors.blue,
                   alignment: Alignment.topLeft,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 16),
                     child: Column(
                       children: [
-
+                        SizedBox(
+                          height: 10,
+                        ),
+                        _dateTime == null
+                            ? Text("Choose Date")
+                            : Text(
+                                "Date: ${_dateTime?.day}-${_dateTime?.month}-${_dateTime?.year}",
+                                style: TextStyle(color: Colors.white)),
+                        _timeOfDay == null
+                            ? Text("Choose Time")
+                            : Text(
+                                "Time: ${_timeOfDay?.hour}:${_timeOfDay?.minute}",
+                                style: TextStyle(color: Colors.white),
+                              )
                       ],
                     ),
                   ),
                 ),
               ],
             ),
-
           )
         ],
       ),
