@@ -32,6 +32,20 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   var _switchChecked = false;
+  late DateTime _dateTime;
+
+  getDate() async{
+    DateTime? date =await showDatePicker(
+        context: context,
+        initialDate: DateTime(DateTime.now().year),
+        firstDate: DateTime(DateTime.now().year-20),
+        lastDate: DateTime(DateTime.now().year+2));
+
+    setState(() {
+      _dateTime = date!;
+      print(_dateTime);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,6 +104,44 @@ class _MyHomePageState extends State<MyHomePage> {
               transform: Matrix4.rotationZ(-30),
               color: Colors.pink,
             ),
+          ),
+          SizedBox(height: 20),
+          Container(
+            alignment: Alignment.topLeft,
+            height: 100,
+            width: double.infinity,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width/2,
+                  color: Colors.pink,
+                  alignment: Alignment.center,
+                  child: Column(
+                    children: [
+                      ElevatedButton(onPressed: (){
+                        getDate();
+                      }, child: Text("DatePicker")),
+                      ElevatedButton(onPressed: (){}, child: Text("TimePicker")),
+                    ],
+                  ),
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width/2,
+                  color: Colors.blue,
+                  alignment: Alignment.topLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 16),
+                    child: Column(
+                      children: [
+
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
           )
         ],
       ),
